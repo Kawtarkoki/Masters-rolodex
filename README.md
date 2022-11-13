@@ -1,7 +1,10 @@
-git clone https://github.com/Kawtarkoki/Masters-rolodex.git
-code .
-npm install
-npm start
+# git clone https://github.com/Kawtarkoki/Masters-rolodex.git
+
+# code .
+
+# npm install
+
+# npm start
 
 # Getting Started with Create React App
 
