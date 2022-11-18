@@ -7,7 +7,7 @@ class App extends Component {
   constructor (){
     super()
     this.state = { 
-     monsters : [],
+      monsters : [],
     };
       
   }
@@ -31,7 +31,17 @@ class App extends Component {
         type='search'
         placeholder='Tap to search for monsters'
         onChange={ (event) => {
-          console.log(event)
+          console.log(event.target.value)
+
+          const searchString = event.target.value.toLocaleLowerCase()
+          const filteredMonsters = this.state.monsters.filter((monster) => {
+            return monster.name.toLocaleLowerCase().includes(searchString);
+          })
+
+          this.setState(() => {
+            return { monsters: filteredMonsters };
+          })
+
         }}
         />
 
