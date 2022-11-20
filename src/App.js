@@ -3,6 +3,7 @@
 import './App.css';
 import  { Component } from 'react' ;
 import CardList from './components/card-list/card-list.component';
+import SearchBox from './components/search-box/search-box.component';
 
 class App extends Component {
   constructor (){
@@ -33,7 +34,6 @@ class App extends Component {
 
   render() { 
     
-    
     const { monsters, searchField} = this.state
     const { onSearChange } = this
 
@@ -43,11 +43,10 @@ class App extends Component {
 
     return (
       <div className="App">
-        <input
+        <SearchBox 
         className='search-box'
-        type='search'
-        placeholder='Tap to search for monsters'
-        onChange={ onSearChange }
+        placeholder='tape to search'
+        onChangeHandler={onSearChange}
         />
         <CardList monsters={filteredMonsters}/>
         
