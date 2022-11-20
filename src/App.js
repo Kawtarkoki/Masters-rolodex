@@ -43,11 +43,13 @@ class App extends Component {
 
     return (
       <div className="App">
+        
         <SearchBox 
-        className='search-box'
+        className='monsters-search-box'
         placeholder='tape to search'
         onChangeHandler={onSearChange}
         />
+
         <CardList monsters={filteredMonsters}/>
         
     </div>
