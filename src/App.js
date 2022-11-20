@@ -2,6 +2,7 @@
 
 import './App.css';
 import  { Component } from 'react' ;
+import CardList from './components/card-list/card-list.component';
 
 class App extends Component {
   constructor (){
@@ -17,9 +18,9 @@ class App extends Component {
       .then( (users) => this.setState( () => {
         return { monsters : users}
       },
-      () => {
-        console.log(this.state);
-      }
+      // () => {
+      //   console.log(this.state);
+      // }
       ));
   }
 
@@ -48,14 +49,8 @@ class App extends Component {
         placeholder='Tap to search for monsters'
         onChange={ onSearChange }
         />
-        {
-          filteredMonsters.map ( (monster) => {
-            return <div key={monster.id}>
-              <h4>{monster.name}</h4>
-              </div>               
-            
-          } )
-        }      
+        <CardList monsters={filteredMonsters}/>
+        
     </div>
     );
   }
