@@ -1,19 +1,35 @@
 import './App.css';
 import CardList from './components/card-list/card-list.component';
 import SearchBox from './components/search-box/search-box.component';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 
 const App = () => {
 
   const [searchField, setSearchField] = useState(''); //[value, setValue]
+  const [monsters, setMonsters] = useState([])
+  
+  const [filteredMonsters, setfilteredMonsters] = useState(monsters);
 
-  console.log({searchField});
+  useEffect( () => {
+    fetch('https://jsonplaceholder.typicode.com/users')
+      .then( (response) => response.json())
+      .then( (users) => setMonsters(users))
+  }, [])
+
+  useEffect( () => {
+    const newFilteredMonsters = monsters.filter((monster) => {
+    return monster.name.toLocaleLowerCase().includes(searchField);
+  })
+  setfilteredMonsters(newFilteredMonsters)
+  
+  }, [monsters, searchField])
+
   const onSearChange = (event) => {
     const searchFieldString = event.target.value.toLocaleLowerCase();
     setSearchField(searchFieldString);
-
   }
+
   return(
     <div className="App">
         
@@ -23,6 +39,8 @@ const App = () => {
         placeholder='tape to search'
         onChangeHandler={onSearChange}
         />
+        <CardList monsters={filteredMonsters}/>
+
     </div>
   );
 };
@@ -39,17 +57,17 @@ export default App;
 //       searchField: '',
 //     };
 //   }
-//   componentDidMount(){
-//     fetch('https://jsonplaceholder.typicode.com/users')
-//       .then( (response) => response.json())
-//       .then( (users) => this.setState( () => {
-//         return { monsters : users}
-//       },
-//       // () => {
-//       //   console.log(this.state);
-//       // }
-//       ));
-//   }
+  // componentDidMount(){
+  //   fetch('https://jsonplaceholder.typicode.com/users')
+  //     .then( (response) => response.json())
+  //     .then( (users) => this.setState( () => {
+  //       return { monsters : users}
+  //     },
+  //     // () => {
+  //     //   console.log(this.state);
+  //     // }
+  //     ));
+  // }
 
 //   onSearChange = (event) => {
 //     const searchField = event.target.value.toLocaleLowerCase()
